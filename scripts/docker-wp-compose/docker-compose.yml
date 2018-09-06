@@ -1,0 +1,36 @@
+nginx:
+    image: nginx:latest
+    ports:
+        - '80:80'
+    volumes:
+        - ./nginx:/etc/nginx/conf.d
+        - ./logs/nginx:/var/log/nginx
+        - ./www:/var/www/html
+    links:
+        - wordpress
+    restart: always
+
+mysql:
+    image: mariadb
+    ports:
+        - '3306:3306'
+    volumes:
+        - ./mariadb:/var/lib/mysql
+    environment:
+        - MYSQL_ROOT_PASSWORD=1qazxsw2
+    restart: always
+
+wordpress:
+    image: wordpress:4.9.8-fpm
+    ports:
+        - '9000:9000'
+    volumes:
+        - ./www:/var/www/html
+    environment:
+        - WORDPRESS_DB_NAME=wpdb
+        - WORDPRESS_TABLE_PREFIX=wp_
+        - WORDPRESS_DB_HOST=mysql
+        - WORDPRESS_DB_PASSWORD=1qazxsw2
+    links:
+        - mysql
+    restart: always
