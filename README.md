@@ -17,6 +17,8 @@ It will build:
 3. execute `terraform init` then `terraform apply`
 
 ## TO-DO
+- [x] update docker-compose.yml to version 3.
+- [x] hide php and nginx information for security.
 - [ ] add rds for option DB.
 - [ ] automate the Wordpress installation without web gui.
 - [ ] add variable for the Wordpress docker image version.
